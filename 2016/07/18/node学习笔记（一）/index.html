@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives | Listen&#39;s blog</title>
+  <title>node学习笔记（一） | Listen&#39;s blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -221,55 +221,77 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/18/node学习笔记（一）/">node学习笔记（一）</a></h4>
-                            
-                            <p><time datetime="2016-07-18T06:24:45.000Z"><a href="/2016/07/18/node学习笔记（一）/">2016-07-18</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/06/22/六月二十二号/">六月二十二号</a></h4>
-                            
-                            <p><time datetime="2016-06-22T02:30:39.000Z"><a href="/2016/06/22/六月二十二号/">2016-06-22</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/06/17/第一篇博文/">第一篇博文</a></h4>
-                            
-                            <p><time datetime="2016-06-17T09:23:47.000Z"><a href="/2016/06/17/第一篇博文/">2016-06-17</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-07-18T06:24:45.000Z" itemprop="datePublished">
+          2016-07-18
+      </time>
+    
+    
+    | 
+    <a href='/tags/nodejs/'>nodejs</a>
+    
+    
+</span>
+                <h1>node学习笔记（一）</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<pre><code>每次过完周末，周一上班时，总想发篇博文。今天打算把之前学习nodejs的笔记整理一下。闲话不说啦，切入正题：
+&lt;一&gt; 简述nodejs
+    （社区：www.npmjs.com）可查找一些第三方模块。
+    nodejs是可以让js运行在浏览器之外的服务器端的平台，实现了文件系统、模块、包、操作系统API、网络通信等JS没有的功能，但是没有DOM和BOM。nodejs使用了来自Google ChromeV8引擎，V8引擎是世界上最快的js引擎。nodejs摒弃了传统平台依赖多线程来实现高并发的设计思路，采用的单线程、异步式I/O，事件驱动式的程序设计模型。（下面以实际生活中的餐厅举例说明）
+nodejs的主线程是单线程的（后台I/O是多线程的），所有阻塞的部分交给一个线程池处理，主线程通过一个队列跟线程池协作。所以nodejs内部实现是单线程非阻塞I/O异步编程。
+先说几个概念
+    多线程：就像是多个服务员同时工作，一个服务员负责一个顾客（开销大）。
+    单线程：就像是一个餐厅只有一个服务员。
+    回调：异步变成基本的方法。
+    同步：就像一个服务员负责一位顾客，直到该顾客的餐全部上齐才会去负责下一位顾客。
+    异步：就像一个服务员负责一位顾客点餐，然后菜单给了厨房之后就可以给下一位顾客点餐了，当第一个顾客的餐做好之后，厨师呼叫这个唯一的服务员，该服务员再给第一位顾客送餐。因此可知，nodejs是单线程异步编程。
+    非阻塞：针对内核来说，向内核发起请求的时候不会阻塞主线程的执行，是实现异步的前置条件。如果厨师比作内核，那么非阻塞就是不让唯一的服务员等待，阻塞就是让唯一的服务员等待。一般来说，阻塞了就是同步了。
+    I/O：Input从文件系统中读取文件（输入），Output向文件系统输入文件（输出）。输入输出的过程就像是做饭的过程。
+    事件环：主线程按时间执行事件队列，由普通函数与回调函数组成。
+&lt;二&gt; 全局对象
+    nodejs中的全局对象global，相当于js中的window。其中global也是global的属性，并且可以无限循环下去（global.global）。
+    &lt;pre&gt;&lt;code&gt;
+        console.time(&quot;cost&quot;);
+        这段代码执行的事件
+        console.timeEnd(&quot;cost&quot;);
+    &lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2016/06/22/六月二十二号/">
+        六月二十二号 →
+    </a>
+    
+</nav>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-        </div>
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/07/18/node学习笔记（一）/" data-title="node学习笔记（一）" data-url="http://yoursite.com/2016/07/18/node学习笔记（一）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
