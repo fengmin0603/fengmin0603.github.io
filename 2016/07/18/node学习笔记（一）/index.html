@@ -256,11 +256,23 @@ nodejs的主线程是单线程的（后台I/O是多线程的），所有阻塞�
     事件环：主线程按时间执行事件队列，由普通函数与回调函数组成。
 &lt;二&gt; 全局对象
     nodejs中的全局对象global，相当于js中的window。其中global也是global的属性，并且可以无限循环下去（global.global）。
-    &lt;pre&gt;&lt;code&gt;
-        console.time(&quot;cost&quot;);
+    __filename 表示当前模块的文件绝对路径
+    __dirname 表示模块所在目录的绝对路径
+    setImmediate 把参数函数放在下一个事件环中的顶部执行，相当于setTimeOut(fn,0),但效率更高一些。
+
+    Process(global属性)
+    1，cwd:process.cwd() //输出当前的工作目录
+    2，chdir:process.chdir(&quot;..&quot;) //切换到上级工作目录
+    3，memoryUsage:process.memoryUsage() //内存的使用量，其中rss表示常驻内存（栈），heapTotal表示堆的总内存，heapUsed表示堆使用内存。nodejs的内存限制为1.4G左右，V8最多能用1.4G内存。
+    4，nextTick:process.nextTick(fn)放在当前任务列表的尾部
+
+    global属性可以直接使用。其他不是global的属性，需要用require进行引用之后才可以使用。
+
+
+    Tips:
+    console.time(&quot;cost&quot;);
         这段代码执行的事件
-        console.timeEnd(&quot;cost&quot;);
-    &lt;/code&gt;&lt;/pre&gt;
+    console.timeEnd(&quot;cost&quot;);
 </code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
