@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Listen&#39;s blog</title>
+  <title>nodejs学习笔记（二） | Listen&#39;s blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -220,17 +220,12 @@
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      <!-- ============================ Content =========================== -->
-
+      
 <section id="intro">
     <div class="container">
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2016/07/21/nodejs学习笔记（二）/">nodejs学习笔记（二）</a></h3>
-                    <span>
-                        <span class="post-meta">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
       <time datetime="2016-07-21T09:04:35.000Z" itemprop="datePublished">
           2016-07-21
       </time>
@@ -241,146 +236,55 @@
     
     
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        工作有点没状态，干脆又来把自己的学习笔记整理一下，很多概念目前还是比较模糊的，下面也基本上是一些概念的罗列，等我什么时候有新的领悟了，会及时进行相关的补充的。
-模块：在node中，每个js就是一个模块，module代表当前模块即当前js。用require加载同一个模块时，属于“===”的关系，因为require有缓存，即require.cache（存放着所有的模块缓存），用delete require.cache[某个模块]，就可以从缓
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/07/21/nodejs学习笔记（二）/">查看更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>nodejs学习笔记（二）</h1>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2016/07/18/node学习笔记（一）/">node学习笔记（一）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-07-18T06:24:45.000Z" itemprop="datePublished">
-          2016-07-18
-      </time>
-    
-    
-    | 
-    <a href='/tags/nodejs/'>nodejs</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        每次过完周末，周一上班时，总想发篇博文。今天打算把之前学习nodejs的笔记整理一下。闲话不说啦，切入正题：
-&lt;一&gt; 简述nodejs
-    （社区：www.npmjs.com）可查找一些第三方模块。
-    nodejs是可以让js运行在浏览器之外的服务器端的平台，实现了文件系统、模块、包、操作系统API、网络通信等JS没有的功能，但是没有DOM和BOM。nodejs使用了来自Google ChromeV8引擎，V8引擎
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/07/18/node学习笔记（一）/">查看更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<pre><code>工作有点没状态，干脆又来把自己的学习笔记整理一下，很多概念目前还是比较模糊的，下面也基本上是一些概念的罗列，等我什么时候有新的领悟了，会及时进行相关的补充的。
+模块：在node中，每个js就是一个模块，module代表当前模块即当前js。用require加载同一个模块时，属于“===”的关系，因为require有缓存，即require.cache（存放着所有的模块缓存），用delete require.cache[某个模块]，就可以从缓存中删除该模块。require是同步的，模块内部的变量是私有的。模块有三种：node自带模块、第三方模块和自定义模块。
+初始化一个项目，包名不能含大写，例如：
+    1，创建并进入目录 mkdir fengmin   \\保证名字的唯一
+    2，初始化项目 npm init fengmin
+    3，编写命令行工具 app.js
+    4，在package.json中添加 &quot;bin&quot;:{&quot;fengmin&quot;:&quot;./app.js&quot;}
+    5，npm publish发布项目
+    6，npm install fengmin -g \\全局安装自己发布的模块
+全局安装：
+    1，查看全局安装的根路径 npm root -g
+    2，把模块安装到全局node_modules下面
+    3，配置可执行文件
+package.json相关概念：
+    一个包下面如果有package.json,则可在package.json文件中用main指定入口文件，如果没有该文件，则默认是该包下面的index.js为入口文件。
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2016/06/22/六月二十二号/">六月二十二号</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-06-22T02:30:39.000Z" itemprop="datePublished">
-          2016-06-22
-      </time>
-    
-    
-    | 
-    <a href='/tags/life/'>life</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        过去两天，好好把转魔方的公式巩固了一下，也是有一点心得的。转动的过程中，虽然情况有很多种，但是公式却只有那几步，很多时候都是重复同一个公式，并没有一开始时认为的难度。就像
-生活中的很多事情，往往都是我们想象的好像很难，一旦付诸行动，难点一个个突破，会意外的发下，另外一些难点也就迎刃而解了。
-有心把angular深入掌握一下，双向数据绑定已经了解了，到此时此刻，指令系统还不是很了解，它的路由机制和nodejs如出一辙，希望可以把所有的知识
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/06/22/六月二十二号/">查看更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2016/06/17/第一篇博文/">第一篇博文</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-06-17T09:23:47.000Z" itemprop="datePublished">
-          2016-06-17
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        请大家多多指教
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/06/17/第一篇博文/">查看更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
+    
+    
+    <a class="pull-right" href="/2016/07/18/node学习笔记（一）/">
+        node学习笔记（一） →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/07/21/nodejs学习笔记（二）/" data-title="nodejs学习笔记（二）" data-url="http://yoursite.com/2016/07/21/nodejs学习笔记（二）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-        </div>
-    </div>
-</section>
-<!-- ============================ END Content =========================== -->
+
 
       
 <!-- ============================ Footer =========================== -->
