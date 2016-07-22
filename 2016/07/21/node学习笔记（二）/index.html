@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2016/7 | Listen&#39;s blog</title>
+  <title>nodejs学习笔记（二） | Listen&#39;s blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -221,55 +221,98 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/22/node学习笔记（三）/">node学习笔记（三）</a></h4>
-                            
-                            <p><time datetime="2016-07-22T02:15:35.000Z"><a href="/2016/07/22/node学习笔记（三）/">2016-07-22</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/21/node学习笔记（二）/">nodejs学习笔记（二）</a></h4>
-                            
-                            <p><time datetime="2016-07-21T09:04:35.000Z"><a href="/2016/07/21/node学习笔记（二）/">2016-07-21</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/18/node学习笔记（一）/">node学习笔记（一）</a></h4>
-                            
-                            <p><time datetime="2016-07-18T06:24:45.000Z"><a href="/2016/07/18/node学习笔记（一）/">2016-07-18</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-07-21T09:04:35.000Z" itemprop="datePublished">
+          2016-07-21
+      </time>
+    
+    
+    | 
+    <a href='/tags/nodejs/'>nodejs</a>
+    
+    
+</span>
+                <h1>nodejs学习笔记（二）</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<pre><code>    #发布一个包，Buffer
+    工作有点没状态，干脆又来把自己的学习笔记整理一下，很多概念目前还是比较模糊的，下面也基本上是一些概念的罗列，等我什么时候有新的领悟了，会及时进行相关的补充的。
+模块：在node中，每个js就是一个模块，module代表当前模块即当前js。用require加载同一个模块时，属于“===”的关系，因为require有缓存，即require.cache（存放着所有的模块缓存），用delete require.cache[某个模块]，就可以从缓存中删除该模块。require是同步的，模块内部的变量是私有的。模块有三种：node自带模块、第三方模块和自定义模块。
+初始化一个项目，包名不能含大写，例如：
+    1，创建并进入目录 mkdir fengmin   \\保证名字的唯一
+    2，初始化项目 npm init fengmin
+    3，编写命令行工具 app.js
+    4，在package.json中添加 &quot;bin&quot;:{&quot;fengmin&quot;:&quot;./app.js&quot;}
+    5，npm publish发布项目
+    6，npm install fengmin -g \\全局安装自己发布的模块
+全局安装：
+    1，查看全局安装的根路径 npm root -g
+    2，把模块安装到全局node_modules下面
+    3，配置可执行文件
+package.json相关概念：
+    一个包下面如果有package.json,则可在package.json文件中用main指定入口文件，如果没有该文件，则默认是该包下面的index.js为入口文件。
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+Buffer
+    全局对象，暂时存放输入输出数据的一段内存。
+    js没有二进制数据类型，但在处理TCP和文件流（图片、音视频等），必须要处理二进制数据，所以服务器端需要用二进制数据。node提供的Buffer对象对二进制进行操作，是一个全局对象，要提前确定放到缓存区中的字节数。
+    1Byte = 8bit,一个中文用两个字节保存。
+    parseInt可以把任意进制转换为十进制，如：parseInt(&quot;111111&quot;,2)和parseInt(&quot;0xff&quot;,16)
+    把十进制转成任意进制用{}.toString,如：（255）.toString(16)。
+    定义Buffer的三种方式：
+        1，var buffer = new Buffer(size)，size表示指定的Buffer的长度，每次实例的新Buffer,输出可能不一样。buffer像是一个字节数组，可以直接赋值，如buffer[0]=0,也可以buffer.fill(0),把buffer中所有元素置为0。
+        2，传个数组，buffer的长度就是数组的长度。如：var buffer = new Buffer([1,2,3,4,5,6]),其中传入的数组一定是数字数组，且数字的范围为0~255，如果不符合传入规则，则默认为0。
+        3，字符串创建，var buffer = new Buffer(str,[encoding]),其中可选编码参数encoding的默认值为utf-8。如：var buffer = new Buffer(&quot;abc&quot;),可得到其分别对应ASC码对应的buffer值，为[97,98,99]。
+    buffer的常用方法
+        1，合并buffer：Buffer.concat([buf1,buf2],length);
+        2，复制Buffer：Buffer.copy(targetBuffer,targetstart,sourcestart,sourceend)
+        3，判断一个对象是否Buffer用isBuffer方法，如：Buffer.isBuffer(buffer);
+
+Util模块
+    node自带的模块，并不是global的属性，所以需要用require引用。
+    var util = require(&quot;util&quot;);
+    1,util.inherits  //子类可以继承父类原型上的方法
+    2,util.inspect  //
+    3,isArray、isRegExp、isDate、isError
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/07/22/node学习笔记（三）/" style="float: left;">
+        ← node学习笔记（三）
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/07/18/node学习笔记（一）/">
+        node学习笔记（一） →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/07/21/node学习笔记（二）/" data-title="nodejs学习笔记（二）" data-url="http://yoursite.com/2016/07/21/node学习笔记（二）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2016/7 | Listen&#39;s blog</title>
+  <title>node学习笔记（三） | Listen&#39;s blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -221,55 +221,93 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/22/node学习笔记（三）/">node学习笔记（三）</a></h4>
-                            
-                            <p><time datetime="2016-07-22T02:15:35.000Z"><a href="/2016/07/22/node学习笔记（三）/">2016-07-22</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/21/node学习笔记（二）/">nodejs学习笔记（二）</a></h4>
-                            
-                            <p><time datetime="2016-07-21T09:04:35.000Z"><a href="/2016/07/21/node学习笔记（二）/">2016-07-21</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/07/18/node学习笔记（一）/">node学习笔记（一）</a></h4>
-                            
-                            <p><time datetime="2016-07-18T06:24:45.000Z"><a href="/2016/07/18/node学习笔记（一）/">2016-07-18</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-07-22T02:15:35.000Z" itemprop="datePublished">
+          2016-07-22
+      </time>
+    
+    
+    | 
+    <a href='/tags/nodejs/'>nodejs</a>
+    
+    
+</span>
+                <h1>node学习笔记（三）</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<pre><code>    #文件和路径
+node中用fs实现文件的读写，fs模块中，所有的异步方法的回调函数的第一个参数都是error对象，所以异步回调方法中的err有值，则说明出错了。
+    var fs = require(&quot;fs&quot;)。
+    fs.readFile    //异步方法，在回调方法处理数据
+    fs.readFileSync(&quot;./1.txt&quot;)    //同步方法读取，有返回值，所有的异步方法一定会晚于同步方法的执行
+    fs.writeFileSync(&quot;./2.txt&quot;,&quot;fengmin&quot;,{encoding:&quot;utf8&quot;})    //同步方法写入
+    fs.writeFile    //异步方法写入，有回调函数
+    1，目录操作
+        创建一个目录，与linux下的创建相似
+            fs.mkdirSync(&quot;a&quot;);
+            fs.mkdir(&quot;a&quot;,function(err){})
+        读取目录下的文件，结果是一个数组
+            fs.readdir(&quot;./a&quot;,function(err,files){
+                files.forEach(function(file){
+                    //此处如果file是目录会报错，因此要用isFile判断一下
+                    fs.readFile(&quot;./a/&quot;+file,function(err,data){
+                        console.log(data.toString());
+                    })
+                })
+            })
+        判断一个文件是否存在
+            fs.exist(&quot;./a&quot;,function(exist){//node中回调的特殊例子，第一个蚕食不是err，而是一个布尔值})
+    2，路径操作
+        var path = require(&quot;path&quot;);
+        路径的“/”，在windows和linux下不一致，windows下是“\”，linux下是“/”。
+        常用方法：
+        1，path.join将多个参数值字符串合并为一个路径字符串    //把多个路径合并为一个路径，如：path.join(__dirname,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);
+        2，path.resolve以应用程序根目录为起点，根据参数解析出一个绝对路径。普通字符串的参数表示当前目录的下级目录；“..”参数表示回到上一级目录；“/”开头表示一个绝对的根目录
+        3，path.basename获取路径中的文件名
+            path.basename(__filename)  //path.js
+            path.basename(__filename,&quot;.js&quot;)  //path
+        4，extname获取路径中的扩展名
+            path.extname(__filename)  //.js
+        5,delimiter操作系统的分隔符，如环境变量中用到的，windows中用的是“;”,linux中用的是“:”
+        6,sep路径的分隔符，如“\”与&quot;/&quot;
+        7,normalize 将非标准的路径字符串转为标准的。如：path.normalize(&quot;a/../b////c/d//&quot;)可以解析为b\c\d\
+        8,relative用于获取两个路径之间的相对关系。
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2016/07/21/node学习笔记（二）/">
+        nodejs学习笔记（二） →
+    </a>
+    
+</nav>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-        </div>
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/07/22/node学习笔记（三）/" data-title="node学习笔记（三）" data-url="http://yoursite.com/2016/07/22/node学习笔记（三）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
