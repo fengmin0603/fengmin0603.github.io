@@ -6,12 +6,12 @@ var docuH = document.documentElement.clientHeight,
     allMoveBox = document.getElementsByClassName('swiper-slide');
 document.getElementsByClassName('swiper-container').item(0).style.height = docuH + 'px';
 
-/*д╛хоотй╬page1*/
+/*д╛О©╫О©╫О©╫О©╫й╬page1*/
 $(".swiper-wrapper").css({
   "top":-docuH
 });
-
-/*Д╞ююфВд╛хо╣добю╜йб╪Ч,хГ╧Ш╡╩╪с╩А╣╪жбiosо╣мЁоб╣дД╞ююфВйб╪Ч╢╔╥╒нйлБ*/
+window.onload = function(){
+/*О©╫О©╫О©╫О©╫О©╫д╛О©╫о╣О©╫О©╫О©╫О©╫О©╫О©╫б╪О©╫,О©╫О©╫О©╫О©╫О©╫О©╫с╩А╣╪О©╫О©╫iosо╣мЁО©╫б╣О©╫О©╫О©╫О©╫О©╫О©╫О©╫б╪О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫*/
 document.addEventListener('touchmove', function (event) {
   event.preventDefault();
 }, false);
@@ -76,8 +76,8 @@ $(".swiper-slide").css({
 }).on("touchmove",function(e){
 }).tap(function(e){
 }).swipe(function(){
-}).swipeUp(function(e){//оРио╩╛╤╞
-  /*й╣╪йспcopy1,1,2,3,4,5,copy5╧╡фъфа║ёйс╬УЁйож╣д╬м5фа║ёсисзотй╬1~5фаё╛кЫрт╤тс╕╣дкВрЩж╣╡╩пХр╙ты-1║ё*/
+}).swipeUp(function(e){//О©╫О©╫О©╫о╩О©╫О©╫О©╫
+  /*й╣О©╫О©╫О©╫О©╫copy1,1,2,3,4,5,copy5О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫с╬О©╫О©╫О©╫О©╫ж╣д╬О©╫5О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫й╬1~5О©╫О©╫О©╫О©╫О©╫О©╫О©╫т╤О©╫с╕О©╫О©╫О©╫О©╫О©╫О©╫ж╣О©╫О©╫О©╫О©╫р╙О©╫О©╫-1О©╫О©╫*/
   var index = $(this).index(),
       allIndex = $('.swiper-slide').length-2;
   var $wrapper = $(".swiper-wrapper");
@@ -156,3 +156,4 @@ $(".swiper-slide").css({
       break;
   }
 })
+}
