@@ -1,20 +1,24 @@
 /**
  * Created by pcfm on 2016/9/29.
  */
+
+
+
 var time_duration = 1000;
 var docuH = document.documentElement.clientHeight,
     allMoveBox = document.getElementsByClassName('swiper-slide');
 document.getElementsByClassName('swiper-container').item(0).style.height = docuH + 'px';
 
-/*Ä¬ï¿½ï¿½ï¿½ï¿½Ê¾page1*/
+/*Ä¬ÈÏÏÔÊ¾page1*/
 $(".swiper-wrapper").css({
   "top":-docuH
 });
-window.onload = function(){
-/*ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»áµ¼ï¿½ï¿½iosÏµÍ³ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+
+/*ä¯ÀÀÆ÷Ä¬ÈÏµÄÏÂÀ­ÊÂ¼þ,Èç¹û²»¼Ó»áµ¼ÖÂiosÏµÍ³ÏÂµÄä¯ÀÀÆ÷ÊÂ¼þ´¥·¢ÎÊÌâ*/
 document.addEventListener('touchmove', function (event) {
   event.preventDefault();
 }, false);
+window.onload = function(){
 page1Show();
 
 function page1Hide(){
@@ -71,13 +75,14 @@ function page2Show(){
   },3*time_duration)
 }
 
+
 $(".swiper-slide").css({
   "height":docuH
 }).on("touchmove",function(e){
 }).tap(function(e){
 }).swipe(function(){
-}).swipeUp(function(e){//ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½
-  /*Êµï¿½ï¿½ï¿½ï¿½copy1,1,2,3,4,5,copy5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ÖµÄ¾ï¿½5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾1~5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½-1ï¿½ï¿½*/
+}).swipeUp(function(e){//ÏòÉÏ»¬¶¯
+  /*Êµ¼ÊÓÐcopy1,1,2,3,4,5,copy5¹²ÆßÆÁ¡£ÊÓ¾õ³ÊÏÖµÄ¾Í5ÆÁ¡£ÓÉÓÚÏÔÊ¾1~5ÆÁ£¬ËùÒÔ¶ÔÓ¦µÄË÷ÒýÖµ²»ÐèÒªÔÙ-1¡£*/
   var index = $(this).index(),
       allIndex = $('.swiper-slide').length-2;
   var $wrapper = $(".swiper-wrapper");
@@ -155,5 +160,5 @@ $(".swiper-slide").css({
       }
       break;
   }
-})
-}
+});
+    }
