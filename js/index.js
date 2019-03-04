@@ -17,7 +17,13 @@ $(".swiper-wrapper").css({
 
 /*浏览器默认的下拉事件,如果不加会导致ios系统下的浏览器事件触发问题*/
 document.addEventListener('touchmove', function (event) {
-  event.preventDefault();
+  // event.preventDefault();
+  if (event.cancelable) {
+    // 判断默认行为是否已经被禁用
+    if (!event.defaultPrevented) {
+        event.preventDefault();
+    }
+}
 }, false);
 window.onload = function(){
 
@@ -186,11 +192,18 @@ window.onload = function(){
 
   $(".swiper-slide").css({
     "height":docuH
-  }).on("touchmove",function(e){
-  }).tap(function(e){
-  }).swipe(function(){
-  }).swipeUp(function(e){//向上滑动
-    /*实际有copy1,1,2,3,4,5,copy5共七屏。视觉呈现的就5屏。由于显示1~5屏，所以对应的索引值不需要再-1。*/
+  })
+  $(".swiper-slide").tap(function(e){
+    console.log('tap');
+  })
+
+  $(".swiper-slide").swipe(function(){
+    console.log('swipe');
+  })
+  
+  $(".swiper-slide").swipeUp(function(e){//向上滑动
+    console.log('swipeUp');
+    //实际有copy1,1,2,3,4,5,copy5共七屏。视觉呈现的就5屏。由于显示1~5屏，所以对应的索引值不需要再-1。
     var index = $(this).index(),
         allIndex = $('.swiper-slide').length-2;
     var $wrapper = $(".swiper-wrapper");
@@ -239,7 +252,9 @@ window.onload = function(){
         page5Hide();
         break;
     }
-  }).swipeDown(function(e){
+  })
+
+  $(".swiper-slide").swipeDown(function(e){
     console.log("Down!!!!");
     var index = $(this).index(),
         allIndex = $('.swiper-slide').length-2;
@@ -288,31 +303,6 @@ window.onload = function(){
         break;
     }
   });
-  /*$($(".swiper-slide")).each(function(n,v){
-    $(this).trigger("swipeUp");
-  });*/
-  //page1Show();
-  //page1Hide();
-  //page2Show();
-  //page2Hide();
-  //page3Show();
-  //page3Hide();
-  //page4Show();
-  //page4Hide();
-  //page5Show();
-  //page5Hide();
-  //window.setTimeout(function(){
-  //  page3Show();
-  //  page3Hide();
-  //},1000)
-  //window.setTimeout(function(){
-  //  page4Show();
-  //  page4Hide();
-  //},1000)
-  //window.setTimeout(function(){
-  //  page5Show();
-  //  page5Hide();
-  //},1000)
   $(".loading").addClass("hide");
   page1Show();
 };
